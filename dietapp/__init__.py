@@ -4,7 +4,7 @@ from flask_login import LoginManager
 
 # Flask Application Object
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'a93e1c2f91f19391818afa5c'
+app.config['SECRET_KEY'] = '4940a9c6b8335931fded4f3795edab28'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/diet.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

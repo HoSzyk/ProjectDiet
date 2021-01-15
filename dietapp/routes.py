@@ -43,34 +43,6 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route("/register/", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    # Instance of RegisterForm
-    form = RegisterForm(request.form)
-
-    # Check that HTTP request is POST and form is valid
-    if request.method == 'POST' and form.validate():
-        # Generate hashed password for database
-        password_hashed = generate_password_hash(form.password.data, method='sha256')
-
-        # Model object
-        new_user = User(
-            name=form.name.data,
-            username=form.username.data,
-            email=form.email.data,
-            password=password_hashed
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Zarejestrowano pomyślnie!", 'success')
-        # Redirect to login page
-        return redirect(url_for('login'))
-    else:
-        return render_template('register.html', form=form)
-
-
 @app.route('/logout')
 def logout():
     logout_user()

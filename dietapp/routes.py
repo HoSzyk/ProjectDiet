@@ -21,10 +21,7 @@ import datetime
 def products():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['product'] = False
-    prod = []
-    for pr in fetch_products():
-        prod.append(pr.get_dict())
-    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=prod)
+    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=fetch_products())
 
 
 # Login view
@@ -84,15 +81,22 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/diets')
+@app.route('/diets', methods=['GET', 'POST'])
 @login_required
 def diets():
-    enabled_tabs = create_enabled_tabs()
-    enabled_tabs['diet'] = False
-    return render_template('diets.html', title='Diety', enabled_tabs=enabled_tabs)
+    if request.method == 'GET':
+        enabled_tabs = create_enabled_tabs()
+        enabled_tabs['diet'] = False
+        return render_template('diets.html', title='Diety', enabled_tabs=enabled_tabs, diets=fetch_diets())
+    diet = int(request.form.get('diet'))
+    if diet and diet != current_user.diet_id:
+        current_user.diet_id = diet
+        db.session.commit()
+        flash('Pomyślnie zmieniono dietę', 'success')
+    return redirect(url_for('diets'))
 
 
-@app.route('/meals')
+@app.route('/meals', methods=['GET'])
 @login_required
 def meals():
     enabled_tabs = create_enabled_tabs()
@@ -100,7 +104,7 @@ def meals():
     return render_template('meals.html', title='Posiłki', enabled_tabs=enabled_tabs)
 
 
-@app.route('/statistics')
+@app.route('/statistics', methods=['GET'])
 @login_required
 def statistics():
     enabled_tabs = create_enabled_tabs()
@@ -110,12 +114,23 @@ def statistics():
 
 def create_enabled_tabs():
     return {
-        'product':  True,
+        'product': True,
         'diet': True,
         'meal': True,
         'stats': True
     }
 
 
+def parse_query(query):
+    result = []
+    for pr in query:
+        result.append(pr.get_dict())
+    return result
+
+
 def fetch_products():
-    return Product.query.all()
+    return parse_query(Product.query.all())
+
+
+def fetch_diets():
+    return parse_query(Diet.query.all())

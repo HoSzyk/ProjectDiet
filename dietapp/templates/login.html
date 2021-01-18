@@ -3,11 +3,11 @@
 {% block content %}
 {% from "includes/formhelpers.html" import render_field %}
 
-    <div class="content-section">
-        <h4>Login</h4>
-        <hr>
-        <fieldset class="form-group">
-            <form method="POST">
+<div class="content-section">
+    <h4>Login</h4>
+    <hr>
+    <fieldset class="form-group">
+        <form method="POST">
             {{ form.hidden_tag() }}
             {{render_field(form.username, class="form-control")}}
             {{render_field(form.password, class="form-control")}}
@@ -16,6 +16,6 @@
             {{render_field(form.submit, class="btn btn-primary", value="Login")}}
             <hr>
         </form>
-        </fieldset>
-    </div>
+    </fieldset>
+</div>
 {% endblock content %}

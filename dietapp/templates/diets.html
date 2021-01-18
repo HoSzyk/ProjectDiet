@@ -1,23 +1,56 @@
 {% extends "layout.html" %}
-{% from "includes/formhelpers.html" import render_field %}
 {% block content %}
-    <div class="container">
-      <div class="row">
+<div class="container">
+    <div class="row">
         <div class="col-2">
-            <select class="form-select fill" size="3">
-                  <option selected value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+            <select class="form-select fill" id="select_diet" onchange="changeSelected({{diets}})" size="3">
+                {% for diet in diets %}
+                <option {% if current_user.diet_id==diet['id'] %} selected {% endif %} value="{{ diet['id'] }}">{{
+                    diet['name'] }}
+                </option>
+                {% endfor %}
             </select>
         </div>
-        <div class="col">
-            <div class="container">
-                <h3 class="h3" id="product_name">
+        <div class="col-8">
+            <div class="container pull-left">
+                <h3 class="h1 mt-10 pb-10" id="diet_name">
+                    {{ diets[current_user.diet_id-1]['name'] }}
                 </h3>
-                <div class="container" id="product_description">
-                </div>
+
             </div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Limit wartości odżywczej tygodniowo</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Wartość energetyczna</th>
+                    <td id="limit_calorie">{{ diets[current_user.diet_id-1]['calorie'] }}kcal</td>
+                </tr>
+                <tr>
+                    <th scope="row">Tłuszcz</th>
+                    <td id="limit_fat">{{ diets[current_user.diet_id-1]['fat'] }}g</td>
+                </tr>
+                <tr>
+                    <th scope="row">Węglowodany</th>
+                    <td id="limit_carbohydrate">{{ diets[current_user.diet_id-1]['carbohydrate'] }}g</td>
+                </tr>
+                <tr>
+                    <th scope="row">Białko</th>
+                    <td id="limit_protein">{{ diets[current_user.diet_id-1]['protein'] }}g</td>
+                </tr>
+                </tbody>
+            </table>
+            <form method="POST">
+                <div class="relative_bottom_right">
+                    <button type="submit" name="diet" value="{{current_user.diet_id}}" id="button_submit" class="btn btn-primary">Wybierz jako nową dietę</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
+</div>
+<script src="{{ url_for('static', filename='js/diets_script.js') }}"></script>
 {% endblock content %}

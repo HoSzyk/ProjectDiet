@@ -18,7 +18,9 @@ import datetime
 @app.route('/home')
 @login_required
 def home():
-    return render_template('layout.html')
+    enabled_tabs = create_enabled_tabs()
+    enabled_tabs['product'] = False
+    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs)
 
 
 # Login view
@@ -41,7 +43,7 @@ def login():
             flash('Nazwa użytkownika lub hasło jest niepoprawne', 'danger')
             return redirect(url_for('login'))
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, title='Logowanie')
 
 
 @app.route("/register/", methods=['GET', 'POST'])
@@ -68,10 +70,19 @@ def register():
         # Redirect to login page
         return redirect(url_for('login'))
     else:
-        return render_template('register.html', form=form)
+        return render_template('register.html', form=form, title='Rejestracja')
 
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+def create_enabled_tabs():
+    return {
+        'product':  True,
+        'diet': True,
+        'meal': True,
+        'stats': True
+    }

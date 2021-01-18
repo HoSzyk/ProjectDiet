@@ -16,8 +16,9 @@ import datetime
 # Main view
 @app.route('/')
 @app.route('/home')
+@app.route('/products')
 @login_required
-def home():
+def products():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['product'] = False
     return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=[{
@@ -30,7 +31,7 @@ def home():
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('products'))
     # Instance of LoginForm
     form = LoginForm()
     # Check that HTTP request is POST and form is valid
@@ -41,7 +42,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('products'))
         else:
             flash('Nazwa użytkownika lub hasło jest niepoprawne', 'danger')
             return redirect(url_for('login'))
@@ -52,7 +53,7 @@ def login():
 @app.route("/register/", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('products'))
     # Instance of RegisterForm
     form = RegisterForm()
 
@@ -80,6 +81,27 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/diets')
+def diets():
+    enabled_tabs = create_enabled_tabs()
+    enabled_tabs['diet'] = False
+    return render_template('diets.html', title='Diety', enabled_tabs=enabled_tabs)
+
+
+@app.route('/meals')
+def meals():
+    enabled_tabs = create_enabled_tabs()
+    enabled_tabs['meal'] = False
+    return render_template('meals.html', title='Posiłki', enabled_tabs=enabled_tabs)
+
+
+@app.route('/statistics')
+def statistics():
+    enabled_tabs = create_enabled_tabs()
+    enabled_tabs['stats'] = False
+    return render_template('statistics.html', title='Statystyki', enabled_tabs=enabled_tabs)
 
 
 def create_enabled_tabs():

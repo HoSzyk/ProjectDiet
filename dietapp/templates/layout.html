@@ -48,10 +48,10 @@
     <div class="container">
         <div class="row">
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['product'] %} isDisabled {% endif %}" href="{{ url_for('logout') }}">Produkty spożywcze</a></li>
-                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['diet'] %} isDisabled {% endif %}" href="{{ url_for('logout') }}">Diety</a></li>
-                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['meal'] %} isDisabled {% endif %}" href="{{ url_for('logout') }}">Zjedzone Posiłki</a></li>
-                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['stats'] %} isDisabled {% endif %}" href="{{ url_for('logout') }}">Statystyki</a></li>
+                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['product'] %} isDisabled {% endif %}" href="{{ url_for('products') }}">Produkty spożywcze</a></li>
+                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['diet'] %} isDisabled {% endif %}" href="{{ url_for('diets') }}">Diety</a></li>
+                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['meal'] %} isDisabled {% endif %}" href="{{ url_for('meals') }}">Zjedzone Posiłki</a></li>
+                <li class="nav-item"><a class="nav-link {% if enabled_tabs and not enabled_tabs['stats'] %} isDisabled {% endif %}" href="{{ url_for('statistics') }}">Statystyki</a></li>
             </ul>
         </div>
     </div>

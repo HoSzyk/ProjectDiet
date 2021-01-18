@@ -20,7 +20,10 @@ import datetime
 def home():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['product'] = False
-    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs)
+    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=[{
+        'name': 'test',
+        'information': 'test test'
+    }])
 
 
 # Login view

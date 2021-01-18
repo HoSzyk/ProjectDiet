@@ -21,10 +21,10 @@ import datetime
 def products():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['product'] = False
-    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=[{
-        'name': 'test',
-        'information': 'test test'
-    }])
+    prod = []
+    for pr in fetch_products():
+        prod.append(pr.get_dict())
+    return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=prod)
 
 
 # Login view
@@ -78,12 +78,14 @@ def register():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 
 @app.route('/diets')
+@login_required
 def diets():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['diet'] = False
@@ -91,6 +93,7 @@ def diets():
 
 
 @app.route('/meals')
+@login_required
 def meals():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['meal'] = False
@@ -98,6 +101,7 @@ def meals():
 
 
 @app.route('/statistics')
+@login_required
 def statistics():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['stats'] = False
@@ -111,3 +115,7 @@ def create_enabled_tabs():
         'meal': True,
         'stats': True
     }
+
+
+def fetch_products():
+    return Product.query.all()

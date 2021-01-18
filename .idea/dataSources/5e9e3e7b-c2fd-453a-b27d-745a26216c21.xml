@@ -1325,176 +1325,184 @@
       <Position>5</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <key id="490" parent="168">
+    <column id="490" parent="168" name="name">
+      <Position>6</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <key id="491" parent="168">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="491" parent="169" name="id">
+    <column id="492" parent="169" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="492" parent="169" name="weight">
+    <column id="493" parent="169" name="weight">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="493" parent="169" name="meal_id">
+    <column id="494" parent="169" name="meal_id">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="494" parent="169" name="product_id">
+    <column id="495" parent="169" name="product_id">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <key id="495" parent="169">
+    <key id="496" parent="169">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="496" parent="169">
+    <foreign-key id="497" parent="169">
       <ColNames>meal_id</ColNames>
       <RefTableName>meals</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="497" parent="169">
+    <foreign-key id="498" parent="169">
       <ColNames>product_id</ColNames>
       <RefTableName>products</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="498" parent="170" name="id">
+    <column id="499" parent="170" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="499" parent="170" name="date">
+    <column id="500" parent="170" name="date">
       <Position>2</Position>
       <DataType>DATETIME|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="500" parent="170" name="protein">
+    <column id="501" parent="170" name="protein">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="501" parent="170" name="fat">
+    <column id="502" parent="170" name="fat">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="502" parent="170" name="carbohydrate">
+    <column id="503" parent="170" name="carbohydrate">
       <Position>5</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="503" parent="170" name="calorie">
+    <column id="504" parent="170" name="calorie">
       <Position>6</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="504" parent="170" name="user_id">
+    <column id="505" parent="170" name="user_id">
       <Position>7</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <key id="505" parent="170">
+    <key id="506" parent="170">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="506" parent="170">
+    <foreign-key id="507" parent="170">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="507" parent="171" name="id">
+    <column id="508" parent="171" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="508" parent="171" name="protein">
+    <column id="509" parent="171" name="protein">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="509" parent="171" name="fat">
+    <column id="510" parent="171" name="fat">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="510" parent="171" name="carbohydrate">
+    <column id="511" parent="171" name="carbohydrate">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="511" parent="171" name="calorie">
+    <column id="512" parent="171" name="calorie">
       <Position>5</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <column id="512" parent="171" name="user_id">
+    <column id="513" parent="171" name="user_id">
       <Position>6</Position>
       <DataType>INTEGER|0s</DataType>
     </column>
-    <key id="513" parent="171">
+    <column id="514" parent="171" name="name">
+      <Position>7</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <key id="515" parent="171">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="514" parent="171">
+    <foreign-key id="516" parent="171">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="515" parent="172" name="type">
+    <column id="517" parent="172" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="516" parent="172" name="name">
+    <column id="518" parent="172" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="517" parent="172" name="tbl_name">
+    <column id="519" parent="172" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="518" parent="172" name="rootpage">
+    <column id="520" parent="172" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="519" parent="172" name="sql">
+    <column id="521" parent="172" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="520" parent="173" name="id">
+    <column id="522" parent="173" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="521" parent="173" name="email">
+    <column id="523" parent="173" name="email">
       <Position>2</Position>
       <DataType>VARCHAR(50)|0s</DataType>
     </column>
-    <column id="522" parent="173" name="name">
+    <column id="524" parent="173" name="name">
       <Position>3</Position>
       <DataType>VARCHAR(50)|0s</DataType>
     </column>
-    <column id="523" parent="173" name="password">
+    <column id="525" parent="173" name="password">
       <Position>4</Position>
       <DataType>VARCHAR(256)|0s</DataType>
     </column>
-    <column id="524" parent="173" name="role">
+    <column id="526" parent="173" name="role">
       <Position>5</Position>
       <DataType>VARCHAR(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="525" parent="173" name="diet_id">
+    <column id="527" parent="173" name="diet_id">
       <Position>6</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="526" parent="173" name="sqlite_autoindex_users_1">
+    <index id="528" parent="173" name="sqlite_autoindex_users_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="527" parent="173">
+    <key id="529" parent="173">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="528" parent="173">
+    <key id="530" parent="173">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="529" parent="173">
+    <foreign-key id="531" parent="173">
       <ColNames>diet_id</ColNames>
       <RefTableName>diets</RefTableName>
       <RefColNames>id</RefColNames>

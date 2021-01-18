@@ -1,25 +1,58 @@
 {% extends "layout.html" %}
-{% from "includes/formhelpers.html" import render_field %}
+{% block head %}
+
+{% endblock head %}
 {% block content %}
-    <div class="container">
-      <div class="row">
-        <div class="col">
-            <select class="form-select fill" size="3">
-                  <option selected value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <select class="form-select fill" id="select_product" onchange="changeSelected({{products}})" size="3">
+                <option selected value="{{ products[0]['id'] }}">{{ products[0]['name'] }}</option>
+                {% for product in products[1:] %}
+                <option value="{{ product['id'] }}">{{ product['name'] }}</option>
+                {% endfor %}
             </select>
         </div>
-        <div class="col">
-            <div class="container">
-                <h3 class="h3" id="product_name">
+        <div class="col-6">
+            <div class="container pull-left">
+                <h3 class="h1 mt-10 pb-10" id="product_name">
                     {{ products[0]['name'] }}
                 </h3>
-                <div class="container" id="product_description">
-                    {{ products[0]['information'] }}
-                </div>
+
             </div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Wartość odżywcza produktu</th>
+                    <th scope="col">w 100 gramach produktu</th>
+                    <th scope="col">w 250 gramach produktu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Wartość energetyczna</th>
+                    <td id="calorie_100g">{{ products[0]['calorie'] }}kcal</td>
+                    <td id="calorie_250g">{{ products[0]['calorie'] * 2.5}}kcal</td>
+                </tr>
+                <tr>
+                    <th scope="row">Tłuszcz</th>
+                    <td id="fat_100g">{{ products[0]['fat'] }}g</td>
+                    <td id="fat_250g">{{ products[0]['fat'] * 2.5}}g</td>
+                </tr>
+                <tr>
+                    <th scope="row">Węglowodany</th>
+                    <td id="carbohydrate_100g">{{ products[0]['carbohydrate'] }}g</td>
+                    <td id="carbohydrate_250g">{{ products[0]['carbohydrate'] * 2.5}}g</td>
+                </tr>
+                <tr>
+                    <th scope="row">Białko</th>
+                    <td id="protein_100g">{{ products[0]['protein'] }}g</td>
+                    <td id="protein_250g">{{ products[0]['protein'] * 2.5}}g</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-      </div>
     </div>
+</div>
+<script src="{{ url_for('static', filename='js/products_script.js') }}"></script>
 {% endblock content %}

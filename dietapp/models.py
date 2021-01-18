@@ -54,7 +54,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(256))
     role = db.Column(db.String(50), nullable=False, default='user')
 
-    diet_id = db.Column(db.Integer, db.ForeignKey('diets.id'), nullable=False)
+    diet_id = db.Column(db.Integer, db.ForeignKey('diets.id'), nullable=False, default=1)
 
     meals = db.relationship('Meal', backref='author', lazy=True)
     products = db.relationship('Product', backref='author', lazy=True)

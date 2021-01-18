@@ -1478,6 +1478,7 @@
     <column id="525" parent="173" name="diet_id">
       <Position>6</Position>
       <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="526" parent="173" name="sqlite_autoindex_users_1">
       <NameSurrogate>1</NameSurrogate>

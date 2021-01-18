@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% from "includes/formhelpers.html" import render_field %}
+
+    <div class="content-section">
+        <h4>Login</h4>
+        <hr>
+        <fieldset class="form-group">
+            <form method="POST">
+            {{ form.hidden_tag() }}
+            {{render_field(form.username, class="form-control")}}
+            {{render_field(form.password, class="form-control")}}
+            {{form.remember(class="from-check-input")}}
+            {{form.remember.label(class="from-check-label")}}
+            {{render_field(form.submit, class="btn btn-primary", value="Login")}}
+            <hr>
+        </form>
+        </fieldset>
+    </div>
+{% endblock content %}

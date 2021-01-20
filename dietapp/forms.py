@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, PasswordField, validators, SubmitField, Form, IntegerField
+from wtforms import BooleanField, StringField, PasswordField, validators, SubmitField, IntegerField
 from wtforms.validators import ValidationError
-from dietapp.models import User
+
+from dietapp.models import User, Product
 
 
 class LoginForm(FlaskForm):
@@ -42,16 +43,21 @@ class RegisterForm(FlaskForm):
 
 
 class ProductForm(FlaskForm):
-    product_name = StringField("Nazwa produktu: ", validators=[validators.Length(min=1, max=25),
-                                                             validators.DataRequired(
-                                                                 message="Proszę uzupełnić pole!")])
-    calorie = IntegerField("Wartość energetyczna", validators=[validators.DataRequired(
-        message="Proszę uzupełnić pole!")])
-    fat = IntegerField("Tłuszcz", validators=[validators.DataRequired(
-        message="Proszę uzupełnić pole!")])
-    Carbohydrate = IntegerField("Węglowodany", validators=[validators.DataRequired(
-        message="Proszę uzupełnić pole!")])
-    protein = IntegerField("Białko", validators=[validators.DataRequired(
-        message="Proszę uzupełnić pole!")])
+    product_name = StringField("Nazwa produktu: ", validators=[
+        validators.DataRequired(
+            message="Podano niekompletne dane: Nazwa produktu")])
+    calorie = IntegerField("Wartość energetyczna", validators=[validators.InputRequired(
+        message="Podano niekompletne dane: Wartość energetyczna")])
+    fat = IntegerField("Tłuszcz", validators=[validators.InputRequired(
+        message="Podano niekompletne dane: Tłuszcz")])
+    carbohydrate = IntegerField("Węglowodany", validators=[validators.InputRequired(
+        message="Podano niekompletne dane: Węglowodany")])
+    protein = IntegerField("Białko", validators=[validators.InputRequired(
+        message="Podano niekompletne dane: Białko")])
 
     submit = SubmitField("")
+
+    def validate_product_name(self, product_name):
+        product = Product.query.filter_by(name=product_name.data).first()
+        if product:
+            raise ValidationError('Produkt o takiej nazwie już istnieje. Proszę wybrać inną nazwę.')

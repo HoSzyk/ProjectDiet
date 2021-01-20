@@ -3,9 +3,8 @@
 
 {% endblock head %}
 {% block content %}
-{% from "includes/formhelpers.html" import render_field %}
 <div class="container">
-    <form method="POST" action="">
+    <form method="POST" novalidate action="">
         {{ form.hidden_tag() }}
         <div class="row fill">
             <div class="col-6 mt-10 mb-10">
@@ -28,19 +27,19 @@
                     <tbody>
                     <tr>
                         <th scope="row">Wartość energetyczna</th>
-                        <td id="calorie_100g">kcal</td>
+                        <td>{{ form.calorie(class="form-control")}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Tłuszcz</th>
-                        <td id="fat_100g">g</td>
+                        <td>{{ form.fat(class="form-control")}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Węglowodany</th>
-                        <td id="carbohydrate_100g">g</td>
+                        <td>{{ form.carbohydrate(class="form-control")}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Białko</th>
-                        <td id="protein_100g">g</td>
+                        <td>{{ form.protein(class="form-control")}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -58,7 +57,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </form>
 </div>

@@ -21,6 +21,8 @@ import datetime
 def products():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['product'] = False
+    if current_user.is_admin():
+        return redirect(url_for('products_admin'))
     return render_template('products.html', title='Produkty', enabled_tabs=enabled_tabs, products=fetch_products())
 
 
@@ -129,13 +131,34 @@ def products_admin():
 @app.route('/products_admin/add', methods=['GET', 'POST'])
 @login_required
 def products_admin_add():
-    if current_user.is_admin():
-        form = ProductForm()
-        return render_template('admin_templates/products_admin_add.html',
-                               title='Zarządzanie produktami',
-                               form=form)
-    else:
-        return redirect(url_for('products'))
+    form = ProductForm()
+
+    if request.method == 'GET':
+        if current_user.is_admin():
+
+            return render_template('admin_templates/products_admin_add.html',
+                                   title='Zarządzanie produktami',
+                                   form=form)
+        else:
+            return redirect(url_for('products'))
+
+    if request.method == 'POST' and form.validate_on_submit():
+        product = Product(
+            name=form.product_name.data,
+            calorie=form.calorie.data,
+            carbohydrate=form.carbohydrate.data,
+            fat=form.fat.data,
+            protein=form.protein.data,
+            user_id=current_user.id
+        )
+        db.session.add(product)
+        db.session.commit()
+        flash('Dodano produkt', 'success')
+        return redirect(url_for('products_admin'))
+    flash_form_errors(form)
+    return render_template('admin_templates/products_admin_add.html',
+                           title='Zarządzanie produktami',
+                           form=form)
 
 
 def create_enabled_tabs():
@@ -160,3 +183,10 @@ def fetch_products():
 
 def fetch_diets():
     return parse_query(Diet.query.all())
+
+
+def flash_form_errors(form):
+    if form.errors:
+        for error_field, error_message_list in form.errors.items():
+            for error_message in error_message_list:
+                flash(error_message, 'danger')

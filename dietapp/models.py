@@ -81,6 +81,9 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.email}'"
 
+    def is_admin(self):
+        return self.role == 'admin'
+
 
 class Diet(db.Model):
     __tablename__ = 'diets'

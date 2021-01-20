@@ -12,8 +12,8 @@
                 <option value="{{ product['id'] }}">{{ product['name'] }}</option>
                 {% endfor %}
             </select>
-            <a href="#">
-                <button class="btn btn-primary button_add_product">&#x2B Dodaj nowy produkt
+            <a href="{{ url_for('products_admin_add') }}">
+                <button type="button" class="btn btn-primary button_add_product">&#x2B Dodaj nowy produkt
                 </button>
             </a>
         </div>
@@ -56,13 +56,12 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="row mt-30" >
-                <div class="col-2"></div>
-                <div class="col">
+            <div class="row mt-30 justify-content-between" >
+                <div class="col-3">
                     <button class="btn btn-primary button_add_product button_product">Edytuj produkt
                 </button>
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <button class="btn btn-primary button_add_product button_product">Usuń produkt
                 </button>
                 </div>

@@ -28,10 +28,10 @@ def products():
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.role == 'user':
-            return redirect(url_for('products'))
-        else:
+        if current_user.is_admin():
             return redirect(url_for('products_admin'))
+        else:
+            return redirect(url_for('products'))
     # Instance of LoginForm
     form = LoginForm()
     # Check that HTTP request is POST and form is valid
@@ -107,20 +107,35 @@ def meals():
     return render_template('meals.html', title='Posiłki', enabled_tabs=enabled_tabs)
 
 
-@app.route('/products_admin', methods=['GET'])
-@login_required
-def products_admin():
-    return render_template('admin_templates/products_admin.html',
-                           title='Zarządzanie produktami',
-                           products=fetch_products())
-
-
 @app.route('/statistics', methods=['GET'])
 @login_required
 def statistics():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['stats'] = False
     return render_template('statistics.html', title='Statystyki', enabled_tabs=enabled_tabs)
+
+
+@app.route('/products_admin', methods=['GET'])
+@login_required
+def products_admin():
+    if current_user.is_admin():
+        return render_template('admin_templates/products_admin.html',
+                               title='Zarządzanie produktami',
+                               products=fetch_products())
+    else:
+        return redirect(url_for('products'))
+
+
+@app.route('/products_admin/add', methods=['GET', 'POST'])
+@login_required
+def products_admin_add():
+    if current_user.is_admin():
+        form = ProductForm()
+        return render_template('admin_templates/products_admin_add.html',
+                               title='Zarządzanie produktami',
+                               form=form)
+    else:
+        return redirect(url_for('products'))
 
 
 def create_enabled_tabs():

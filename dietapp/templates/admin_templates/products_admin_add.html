@@ -1,0 +1,65 @@
+{% extends "admin_templates/layout_admin.html" %}
+{% block head %}
+
+{% endblock head %}
+{% block content %}
+{% from "includes/formhelpers.html" import render_field %}
+<div class="container">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="row fill">
+            <div class="col-6 mt-10 mb-10">
+                <h1 class="h2">Dodawanie nowego produktu:</h1>
+                <div class="row mt-30 mr-30">
+                    <div class="col-6 text-center">{{ form.product_name.label(class="h4")}}</div>
+                    <div class="col">{{ form.product_name(class="form-control")}}</div>
+                </div>
+
+            </div>
+
+            <div class="col mt-30">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Wartość odżywcza produktu</th>
+                        <th scope="col">w 100 gramach produktu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Wartość energetyczna</th>
+                        <td id="calorie_100g">kcal</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tłuszcz</th>
+                        <td id="fat_100g">g</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Węglowodany</th>
+                        <td id="carbohydrate_100g">g</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Białko</th>
+                        <td id="protein_100g">g</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row mt-30 justify-content-between">
+                    <div class="col-2"></div>
+                    <a href="{{ url_for('products_admin') }}">
+                        <div class="col-3">
+                            <button type="button" class="btn btn-primary button_add_product button_product">Anuluj
+                            </button>
+                        </div>
+                    </a>
+                    <div class="col-3">
+                        {{form.submit(class="btn btn-primary button_add_product button_product", value="Dodaj
+                        produkt")}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock content %}

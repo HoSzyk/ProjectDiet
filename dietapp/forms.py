@@ -42,7 +42,7 @@ class RegisterForm(FlaskForm):
 
 
 class ProductForm(FlaskForm):
-    product_name = StringField("Nazwa produktu", validators=[validators.Length(min=1, max=25),
+    product_name = StringField("Nazwa produktu: ", validators=[validators.Length(min=1, max=25),
                                                              validators.DataRequired(
                                                                  message="Proszę uzupełnić pole!")])
     calorie = IntegerField("Wartość energetyczna", validators=[validators.DataRequired(

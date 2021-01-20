@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, PasswordField, validators, SubmitField, Form
+from wtforms import BooleanField, StringField, PasswordField, validators, SubmitField, Form, IntegerField
 from wtforms.validators import ValidationError
 from dietapp.models import User
 
@@ -39,3 +39,19 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email jest już w użyciu. Proszę wybrać inny.')
+
+
+class ProductForm(FlaskForm):
+    product_name = StringField("Nazwa produktu", validators=[validators.Length(min=1, max=25),
+                                                             validators.DataRequired(
+                                                                 message="Proszę uzupełnić pole!")])
+    calorie = IntegerField("Wartość energetyczna", validators=[validators.DataRequired(
+        message="Proszę uzupełnić pole!")])
+    fat = IntegerField("Tłuszcz", validators=[validators.DataRequired(
+        message="Proszę uzupełnić pole!")])
+    Carbohydrate = IntegerField("Węglowodany", validators=[validators.DataRequired(
+        message="Proszę uzupełnić pole!")])
+    protein = IntegerField("Białko", validators=[validators.DataRequired(
+        message="Proszę uzupełnić pole!")])
+
+    submit = SubmitField("")

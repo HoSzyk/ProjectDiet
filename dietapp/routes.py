@@ -110,7 +110,9 @@ def meals():
 @app.route('/products_admin', methods=['GET'])
 @login_required
 def products_admin():
-    return render_template('products_admin.html', title='Zarządzanie produktami', products=fetch_products())
+    return render_template('admin_templates/products_admin.html',
+                           title='Zarządzanie produktami',
+                           products=fetch_products())
 
 
 @app.route('/statistics', methods=['GET'])

@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_admin.html" %}
 {% block head %}
 
 {% endblock head %}
@@ -6,13 +6,18 @@
 <div class="container">
     <div class="row fill">
         <div class="col-2">
-            <select class="form-select fill" id="select_product" onchange="changeSelected({{products}})" size="3">
+            <select class="form-select fill_admin" id="select_product" onchange="changeSelected({{products}})" size="3">
                 <option selected value="{{ products[0]['id'] }}">{{ products[0]['name'] }}</option>
                 {% for product in products[1:] %}
                 <option value="{{ product['id'] }}">{{ product['name'] }}</option>
                 {% endfor %}
             </select>
+            <a href="#">
+                <button class="btn btn-primary button_add_product">&#x2B Dodaj nowy produkt
+                </button>
+            </a>
         </div>
+        <div class="verticalLine"></div>
         <div class="col-6">
             <div class="container pull-left">
                 <h3 class="h1 mt-10 pb-10" id="product_name">
@@ -51,6 +56,17 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="row mt-30" >
+                <div class="col-2"></div>
+                <div class="col">
+                    <button class="btn btn-primary button_add_product button_product">Edytuj produkt
+                </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary button_add_product button_product">Usuń produkt
+                </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -28,7 +28,10 @@ def products():
 @app.route("/login/", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('products'))
+        if current_user.role == 'user':
+            return redirect(url_for('products'))
+        else:
+            return redirect(url_for('products_admin'))
     # Instance of LoginForm
     form = LoginForm()
     # Check that HTTP request is POST and form is valid
@@ -39,7 +42,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('products'))
+            return redirect(next_page) if next_page else redirect(url_for('login'))
         else:
             flash('Nazwa użytkownika lub hasło jest niepoprawne', 'danger')
             return redirect(url_for('login'))
@@ -102,6 +105,12 @@ def meals():
     enabled_tabs = create_enabled_tabs()
     enabled_tabs['meal'] = False
     return render_template('meals.html', title='Posiłki', enabled_tabs=enabled_tabs)
+
+
+@app.route('/products_admin', methods=['GET'])
+@login_required
+def products_admin():
+    return render_template('products_admin.html', title='Zarządzanie produktami', products=fetch_products())
 
 
 @app.route('/statistics', methods=['GET'])

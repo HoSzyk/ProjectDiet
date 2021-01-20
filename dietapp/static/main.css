@@ -32,12 +32,33 @@
 }
 
 
+.fill_admin {
+  height: 67vh;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+
+.button_add_product {
+  width: 100%;
+  font-size: 13px;
+}
+
+.button_product {
+  width: auto;
+}
+
 .relative_bottom_right {
   right: 5%;
   bottom: 10%;
   position: absolute;
 }
 
+.verticalLine {
+  border-left: 1px solid #000000;
+  height: 100%;
+}
 
 .mt-10 {
   margin-top: 10px !important;
@@ -45,4 +66,8 @@
 
 .pb-10 {
   padding-bottom: 10px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
 }

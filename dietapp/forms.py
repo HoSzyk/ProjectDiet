@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, PasswordField, validators, SubmitField, IntegerField
 from wtforms.validators import ValidationError
-
+import re
 from dietapp.models import User, Product
 
 
@@ -61,3 +61,8 @@ class ProductForm(FlaskForm):
         product = Product.query.filter_by(name=product_name.data).first()
         if product:
             raise ValidationError('Produkt o takiej nazwie już istnieje. Proszę wybrać inną nazwę.')
+
+
+def validate_email_string(email):
+    regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+    return True if re.match(regex, email) else False

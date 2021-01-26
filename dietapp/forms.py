@@ -10,22 +10,17 @@ class LoginForm(FlaskForm):
                                                             validators.DataRequired(
                                                                 message="Proszę uzupełnić pole email!")])
     password = PasswordField("Hasło", validators=[validators.DataRequired(message="Nie podałeś hasła!")])
-
     remember = BooleanField("Zapamiętaj mnie!")
-
     submit = SubmitField("")
 
 
 class RegisterForm(FlaskForm):
     name = StringField("Nazwa profilu", validators=[validators.DataRequired("Wprowadź nazwę")])
-
     email = StringField("Email", validators=[validators.Email(message="Prosze wprowadzić poprawny adres email")])
-
     password = PasswordField("Hasło", validators=[
         validators.DataRequired(message="Proszę wprowadzić hasło dla konta"),
         validators.equal_to(fieldname="confirm_password", message="Twoje hasła muszą się zgadzać")
     ])
-
     confirm_password = PasswordField("Potwierdź hasło",
                                      validators=[validators.DataRequired(message="Proszę potwierdzić hasło")])
 

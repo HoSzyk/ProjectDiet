@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from flask_login import UserMixin
+
 from dietapp import db
 from dietapp import login_manager
-from flask_login import UserMixin
 
 
 @login_manager.user_loader
